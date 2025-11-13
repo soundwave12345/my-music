@@ -1,0 +1,29 @@
+name: Build and Deploy (Self-Hosted Secure)
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    name: Build and Deploy Docker Container
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create .env file with secret
+        run: |
+          echo "WRAPAPI_KEY=${{ secrets.WRAPAPI_KEY }}" > .env
+          chmod 600 .env
+
+      - name: Build and deploy container
+        run: |
+          docker compose --env-file .env build --no-cache
+          docker compose --env-file .env down || true
+          docker compose --env-file .env up -d
+
+      - name: Clean up secrets file
+        if: always()
+        run: shred -u .env || rm -f .env
