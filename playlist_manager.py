@@ -6,10 +6,11 @@ from mutagen.flac import FLAC
 # === CONFIGURAZIONE ===
 MUSIC_DIR = "music"
 OLD_DIR = os.path.join(MUSIC_DIR, "old")
-CLASSIFICA_FILE = "classifica.txt"   # Formato: Titolo - Artista per riga
+CLASSIFICA_FILENAME = "classifica.txt"   # Formato: Titolo - Artista per riga
 PLAYLIST_FILE = "playlist.m3u"
 MANCANTI_FILE = "mancanti.txt"
 
+CLASSIFICA_FILE =os.path.join(MUSIC_DIR, CLASSIFICA_FILENAME)
 playlist_path = os.path.join(MUSIC_DIR, PLAYLIST_FILE)
 mancanti_path = os.path.join(MUSIC_DIR, MANCANTI_FILE)
 
@@ -79,7 +80,7 @@ def crea_playlist(classifica, catalogo, old_catalogo):
             m3u.write(f"{os.path.abspath(path)}\n")
 
     # Scrive file mancanze
-    with open(playlist_path, "w", encoding="utf-8") as mf:
+    with open(mancanti_path, "w", encoding="utf-8") as mf:
         mf.write("\n".join(mancanti))
 
     return trovati, mancanti

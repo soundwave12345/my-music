@@ -10,7 +10,7 @@ if not WRAPAPI_KEY:
 URL = f"https://wrapapi.com/use/soundwave/test/FIMI/0.1.0?wrapAPIKey={WRAPAPI_KEY}"
 
 
-OUTPUT_FILE = "classifica.txt"
+OUTPUT_FILE = "/app/music/classifica.txt"
 
 def scarica_classifica():
     print("📡 Scarico la classifica FIMI...")
