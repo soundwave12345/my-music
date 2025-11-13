@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  music_watcher:
+    build: .
+    container_name: music_watcher
+    restart: unless-stopped
+    environment:
+      - WRAPAPI_KEY
+    volumes:
+      - ./music:/app/music
+      - ./mancanti:/app/mancanti
