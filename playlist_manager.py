@@ -77,8 +77,9 @@ def crea_playlist(classifica, catalogo, old_catalogo):
     with open(playlist_path, "w", encoding="utf-8") as m3u:
         m3u.write("#EXTM3U\n")
         for path in trovati:
-            m3u.write(f"{os.path.abspath(path)}\n")
-
+            #m3u.write(f"{os.path.abspath(path)}\n")
+            rel_path = os.path.relpath(path, MUSIC_DIR)
+            m3u.write(f"./{rel_path}\n")  #
     # Scrive file mancanze
     with open(mancanti_path, "w", encoding="utf-8") as mf:
         mf.write("\n".join(mancanti))
