@@ -12,4 +12,4 @@ RUN mkdir -p /app/music /app/old
 VOLUME ["/app/music"]
 VOLUME ["/app/mancanti"]
 
-CMD ["bash", "-c", "python scheduler.py & python watch_music.py"]
+CMD ["bash", "-c", "python scheduler.py & python music_watcher.py"]
