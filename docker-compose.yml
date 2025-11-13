@@ -7,5 +7,5 @@ services:
     environment:
       - WRAPAPI_KEY
     volumes:
-      - /media/hd0/music/playlist/spotify:/app/music
+      - /media/hd0/music/playlists/spotify:/app/music
       - /home/ha/playlists/mancanti:/app/mancanti
