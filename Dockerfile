@@ -3,7 +3,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
-COPY playlist_manager.py watch_music.py get_classifica.py scheduler.py ./
+COPY playlist_manager.py music_watcher.py get_classifica.py scheduler.py ./
 
 RUN pip install --no-cache-dir mutagen watchdog requests schedule thefuzz
 
