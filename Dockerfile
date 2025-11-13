@@ -5,7 +5,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /app
 COPY playlist_manager.py watch_music.py get_classifica.py scheduler.py ./
 
-RUN pip install --no-cache-dir mutagen watchdog requests schedule
+RUN pip install --no-cache-dir mutagen watchdog requests schedule thefuzz
 
 RUN mkdir -p /app/music /app/old
 
