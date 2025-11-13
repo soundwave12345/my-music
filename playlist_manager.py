@@ -1,5 +1,6 @@
 import os
 import shutil
+from thefuzz import fuzz
 from mutagen.flac import FLAC
 
 # === CONFIGURAZIONE ===
@@ -31,13 +32,27 @@ def leggi_flac_metadata(file_path):
     return titolo, artista
 
 
-def trova_flac(catalogo, titolo, artista):
-    """Trova una canzone nel catalogo per titolo e artista (match semplice)."""
+#def trova_flac(catalogo, titolo, artista):
+#    """Trova una canzone nel catalogo per titolo e artista (match semplice)."""
+#    for path, meta_titolo, meta_artista in catalogo:
+#        if titolo in meta_titolo and artista in meta_artista:
+#            return path
+#    return None
+    
+def trova_flac(catalogo, titolo, artista, soglia=80):
+    """
+    Trova una canzone nel catalogo usando fuzzy match.
+    
+    catalogo: lista di tuple (path, meta_titolo, meta_artista)
+    soglia: percentuale minima di similarità (0-100)
+    """
     for path, meta_titolo, meta_artista in catalogo:
-        if titolo in meta_titolo and artista in meta_artista:
+        score_titolo = fuzz.token_sort_ratio(titolo.lower(), meta_titolo.lower())
+        score_artista = fuzz.token_sort_ratio(artista.lower(), meta_artista.lower())
+        
+        if score_titolo >= soglia and score_artista >= soglia:
             return path
     return None
-
 
 def crea_playlist(classifica, catalogo, old_catalogo):
     trovati = []
